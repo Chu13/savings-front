@@ -9,6 +9,17 @@ import Footer from '../../components/Footer/';
 
 import Dashboard from '../../views/Dashboard/';
 
+function PrivateRoute ({component: Component, authenticated, tokenQuote, ...rest}) {
+  return (
+  <Route
+    {...rest}
+    render={(props) => authenticated === true
+      ? <Component tokenQuote={tokenQuote} {...props} />
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+  />
+)
+}
+
 class Full extends Component {
   render() {
     return (
@@ -20,7 +31,7 @@ class Full extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+                <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
