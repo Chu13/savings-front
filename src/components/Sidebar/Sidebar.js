@@ -146,13 +146,8 @@ class Sidebar extends Component {
 
     // sidebar-nav root
     return (
-      <div className="sidebar">
-        <SidebarHeader/>
-        <SidebarForm/>
-        <nav className="sidebar-nav">
-          <Nav>
-            {navList(nav.items)}
-          </Nav>
+      <div className="sidebar bg-light" style={{width:"100px", paddingLeft:'0', marginRight: '0'}}>
+        <nav className="sidebar-nav" style={{width:"100px"}}>
         </nav>
         <SidebarFooter/>
         <SidebarMinimizer/>

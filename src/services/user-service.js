@@ -1,4 +1,6 @@
 import axios from 'axios'
+let develop = 'http://localhost:3000'
+let prod = "https://savings-app-backend.herokuapp.com"
 
 export class UserApiService {
 
@@ -6,7 +8,7 @@ export class UserApiService {
 
         return axios({
             method: 'post',
-            url: 'http://localhost:3000/api/user/signup',
+            url: develop +'/api/user/signup',
             data: userInfo
         });
     }
@@ -15,7 +17,7 @@ export class UserApiService {
 
         return axios({
             method: 'get',
-            url: 'http://localhost:3000/api/user/login',
+            url: develop +'/api/user/login',
             auth: {
                 username: userInfo.email,
                 password: userInfo.password

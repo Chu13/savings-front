@@ -21,18 +21,28 @@ function PrivateRoute ({component: Component, authenticated, tokenQuote, ...rest
 }
 
 class Full extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+componentWillMount() {
+  this.setState({
+    authenticated: (!(localStorage.getItem("jwt") === null || localStorage.getItem("jwt") === "")),
+  });
+}
+
   render() {
     return (
       <div className="app">
         <Header />
         <div className="app-body">
           <Sidebar {...this.props}/>
-          <main className="main">
-            <Breadcrumb />
-            <Container fluid>
+          <main className="main" style={{marginLeft: '80px'}}>
+            <Container>
               <Switch>
-                <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Redirect from="/" to="/dashboard"/>
+                <PrivateRoute authenticated={this.state.authenticated} path="/home" name="home" component={Dashboard}/>
+                <Redirect from="/" to="/home"/>
               </Switch>
             </Container>
           </main>

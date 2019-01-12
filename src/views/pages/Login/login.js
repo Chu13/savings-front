@@ -47,11 +47,12 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
     }
-    console.log(info)
     let a = new UserApiService()
     a.postUserLogin(info)
       .then((res) => {
-        console.log(res)
+        localStorage.setItem("jwt", res.data.jwt)
+        localStorage.setItem("refreshToken", res.data.refreshToken)
+        this.props.history.push('Home');
       })
       .catch((err) => {
         console.log(err)
@@ -63,9 +64,9 @@ class Login extends Component {
 
     return (
       <div className="app flex-row align-items-center" style={{marginTop: '0', backgroundImage:"url('"+bg_img+"'", backgroundSize: "cover"}}>
-        <Container>
+        <Container >
           <Row className="justify-content-center">
-            <Col md="12">
+            <Col sm="8" md="8" lg="6">
               <CardGroup className="mb-4">
                 <Card className="p-4" style={{backgroundColor: 'transparent', border:'none'}}>
                   <CardBody className="text-white text-center">
